@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process
+    name="loginBPEL"
+    targetNamespace="http://enterprise.netbeans.org/bpel/LoginBPEL/loginBPEL"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/LoginBPEL/loginBPEL"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:sxed2="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2" xmlns:ns0="http://xml.netbeans.org/schema/LoginRequest" xmlns:ns1="http://xml.netbeans.org/schema/LoginReply">
+    <import namespace="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL" location="ClientWSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://j2ee.netbeans.org/wsdl/LoginService/LoginWSDL" location="LoginService/fr/insa/docs/LoginWSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="Client" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL" partnerLinkType="tns:ClientWSDL" myRole="ClientWSDLPortTypeRole"/>
+        <partnerLink name="LoginService" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginService/LoginWSDL" partnerLinkType="tns:LoginWSDL" partnerRole="LoginWSDLPortTypeRole"/>
+    </partnerLinks>
+    <variables>
+        <variable name="FinalReplyToClient" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL" messageType="tns:getClientOperationResponse"/>
+        <variable name="inDBFromLoginService" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginService/LoginWSDL" messageType="tns:isInDBOperationResponse"/>
+        <variable name="InfoForLoginService" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginService/LoginWSDL" messageType="tns:isInDBOperationRequest"/>
+        <variable name="LoginInfoClient" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL" messageType="tns:getClientOperationRequest"/>
+    </variables>
+    <sequence>
+        <receive name="ReceiveFromClient" createInstance="yes" partnerLink="Client" operation="getClientOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL" portType="tns:ClientWSDLPortType" variable="LoginInfoClient"/>
+        <assign name="Assign1">
+            <copy>
+                <from>$LoginInfoClient.part1/ns0:LoginRequest/ns0:username</from>
+                <to>$InfoForLoginService.LoginInfo/ns0:username</to>
+            </copy>
+            <copy>
+                <from>$LoginInfoClient.part1/ns0:LoginRequest/ns0:password</from>
+                <to>$InfoForLoginService.LoginInfo/ns0:password</to>
+            </copy>
+        </assign>
+        <invoke name="InvokeLoginWS" partnerLink="LoginService" operation="isInDBOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginService/LoginWSDL" portType="tns:LoginWSDLPortType" inputVariable="InfoForLoginService" outputVariable="inDBFromLoginService"/>
+        <assign name="Assign2">
+            <copy>
+                <from>$inDBFromLoginService.isInDBReply/ns1:isInDB</from>
+                <to>$FinalReplyToClient.clientRep/ns1:LoginReply/ns1:isInDB</to>
+            </copy>
+        </assign>
+        <reply name="ReplyToClient" partnerLink="Client" operation="getClientOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL" portType="tns:ClientWSDLPortType" variable="FinalReplyToClient"/>
+    </sequence>
+</process>
+

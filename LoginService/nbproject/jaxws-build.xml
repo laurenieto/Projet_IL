@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xalan="http://xml.apache.org/xslt" xmlns:ejbjarproject2="http://www.netbeans.org/ns/j2ee-ejbjarproject/2" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSGEN SECTION
+                ===================
+            -->
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <mkdir dir="${classes.dir}"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${j2ee.platform.wsimport.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-service-LoginWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/service/LoginWS"/>
+        <property name="service-wsdl-LoginWS" location="${meta.inf}/xml-resources/web-services/LoginWS/wsdl/LoginWSDLWrapper.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/service/LoginWS" destdir="${build.generated.dir}/jax-wsCache/service/LoginWS" wsdl="${service-wsdl-LoginWS}" catalog="catalog.xml" extension="true" verbose="true" xnocompile="true">
+            <depends file="${wsdl-LoginWS}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/service/LoginWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/service/LoginWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+        <property name="targetLocation-LoginWS" location="${meta.inf}/wsdl/LoginWS"/>
+        <property name="sourceLocation-LoginWS" location="${meta.inf}/xml-resources/web-services/LoginWS/wsdl/"/>
+        <copy todir="${targetLocation-LoginWS}">
+            <fileset dir="${sourceLocation-LoginWS}"/>
+        </copy>
+    </target>
+    <target name="wsimport-service-clean-LoginWS" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/service/LoginWS"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/netbeans/j2ee/wsdl/loginservice/loginwsdl"/>
+    </target>
+    <target name="wsimport-service-generate" depends="wsimport-service-LoginWS"/>
+</project>
