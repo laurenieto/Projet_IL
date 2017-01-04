@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="LoginCompositeApp" xmlns:ns2="http://enterprise.netbeans.org/bpel/LoginBPEL/loginBPEL" xmlns:ns3="http://j2ee.netbeans.org/wsdl/LoginService/LoginWSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/jbi ./jbi.xsd">
+    <service-assembly>
+        <identification>
+            <name>LoginCompositeApp</name>
+            <description>Represents the Service Assembly of LoginCompositeApp</description>
+        </identification>
+        <service-unit>
+            <identification>
+                <name>LoginCompositeApp-LoginService</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>LoginService.jar</artifacts-zip>
+                <component-name>sun-javaee-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>LoginCompositeApp-LoginBPEL</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>LoginBPEL.jar</artifacts-zip>
+                <component-name>sun-bpel-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>LoginCompositeApp-sun-http-binding</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>sun-http-binding.jar</artifacts-zip>
+                <component-name>sun-http-binding</component-name>
+            </target>
+        </service-unit>
+        <connections>
+            <connection>
+                <consumer endpoint-name="casaPort1" service-name="ns1:LoginCompositeAppService1"/>
+                <provider endpoint-name="ClientWSDLPortTypeRole_myRole" service-name="ns2:Client"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="LoginWSDLPortTypeRole_partnerRole" service-name="ns2:LoginService"/>
+                <provider endpoint-name="javaee_LoginWSDLPort" service-name="ns3:LoginWSDLService"/>
+            </connection>
+        </connections>
+    </service-assembly>
+</jbi>

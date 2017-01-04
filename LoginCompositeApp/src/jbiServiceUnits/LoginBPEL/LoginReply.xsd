@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/LoginReply"
+    xmlns:tns="http://xml.netbeans.org/schema/LoginReply"
+    elementFormDefault="qualified">
+    <xsd:element name="LoginReply" type="tns:LoginReplyType"/>
+    <xsd:complexType name="LoginReplyType">
+        <xsd:sequence>
+            <xsd:element name="isInDB" type="xsd:boolean"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

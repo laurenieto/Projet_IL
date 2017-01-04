@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="ClientWSDL" targetNamespace="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL" xmlns:ns="http://xml.netbeans.org/schema/ClientRequest" xmlns:ns0="http://xml.netbeans.org/schema/ClientReply" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+    <types>
+        <xsd:schema targetNamespace="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL">
+            <xsd:import namespace="http://xml.netbeans.org/schema/ClientReply" schemaLocation="ClientReply.xsd"/>
+            <xsd:import namespace="http://xml.netbeans.org/schema/ClientRequest" schemaLocation="ClientRequest.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="getClientOperationRequest">
+        <part name="clientReq" element="ns:ClientRequest"/>
+    </message>
+    <message name="getClientOperationResponse">
+        <part name="clientRep" element="ns0:ClientReply"/>
+    </message>
+    <portType name="ClientWSDLPortType">
+        <operation name="getClientOperation">
+            <input name="input1" message="tns:getClientOperationRequest"/>
+            <output name="output1" message="tns:getClientOperationResponse"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="ClientWSDL">
+        <!-- A partner link type is automatically generated when a new port type is added. Partner link types are used by BPEL processes. 
+In a BPEL process, a partner link represents the interaction between the BPEL process and a partner service. Each partner link is associated with a partner link type.
+A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
+        <plnk:role name="ClientWSDLPortTypeRole" portType="tns:ClientWSDLPortType"/>
+    </plnk:partnerLinkType>
+</definitions>
+

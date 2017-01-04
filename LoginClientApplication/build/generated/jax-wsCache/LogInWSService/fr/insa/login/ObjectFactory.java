@@ -35,19 +35,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetUserInfoResponse }
-     * 
-     */
-    public GetUserInfoResponse createGetUserInfoResponse() {
-        return new GetUserInfoResponse();
-    }
-
-    /**
      * Create an instance of {@link GetUserInfo }
      * 
      */
     public GetUserInfo createGetUserInfo() {
         return new GetUserInfo();
+    }
+
+    /**
+     * Create an instance of {@link GetUserInfoResponse }
+     * 
+     */
+    public GetUserInfoResponse createGetUserInfoResponse() {
+        return new GetUserInfoResponse();
     }
 
     /**

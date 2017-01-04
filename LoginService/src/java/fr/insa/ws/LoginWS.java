@@ -7,6 +7,7 @@ package fr.insa.ws;
 
 import javax.ejb.Stateless;
 import javax.jws.WebService;
+import org.netbeans.j2ee.wsdl.loginservice.loginwsdl.LoginWSDLPortType;
 
 /**
  *
@@ -14,7 +15,7 @@ import javax.jws.WebService;
  */
 @WebService(serviceName = "LoginWSDLService", portName = "LoginWSDLPort", endpointInterface = "org.netbeans.j2ee.wsdl.loginservice.loginwsdl.LoginWSDLPortType", targetNamespace = "http://j2ee.netbeans.org/wsdl/LoginService/LoginWSDL", wsdlLocation = "META-INF/wsdl/LoginWS/LoginWSDLWrapper.wsdl")
 @Stateless
-public class LoginWS {
+public class LoginWS implements LoginWSDLPortType{
 
     public org.netbeans.xml.schema.loginreply.LoginReplyType isInDBOperation(org.netbeans.xml.schema.loginrequest.LoginRequestType loginInfo) {
         //TODO implement this method

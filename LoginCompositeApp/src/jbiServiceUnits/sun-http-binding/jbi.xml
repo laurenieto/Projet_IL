@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="LoginCompositeApp" xmlns:ns2="http://enterprise.netbeans.org/bpel/LoginBPEL/loginBPEL" xmlns:ns3="http://j2ee.netbeans.org/wsdl/LoginService/LoginWSDL" xmlns:ns4="http://j2ee.netbeans.org/wsdl/LoginBPEL/ClientWSDL" version="1.0">
+    <services binding-component="true">
+        <consumes endpoint-name="casaPort1" interface-name="ns4:ClientWSDLPortType" service-name="ns1:LoginCompositeAppService1"/>
+    </services>
+</jbi>
