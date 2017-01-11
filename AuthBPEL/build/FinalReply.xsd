@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/FinalReply"
+    xmlns:tns="http://xml.netbeans.org/schema/FinalReply"
+    elementFormDefault="qualified" xmlns:ns0="http://xml.netbeans.org/schema/ClientReply">
+    <xsd:import schemaLocation="ClientReply.xsd" namespace="http://xml.netbeans.org/schema/ClientReply"/>
+    <xsd:element name="FinalReply"/>
+    <xsd:complexType name="FinalReplyType">
+        <xsd:sequence>
+            <xsd:element ref="ns0:ClientReply"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="AuthCompositeApp" xmlns:ns2="http://enterprise.netbeans.org/bpel/AuthBPEL/authBPEL" xmlns:ns3="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/jbi ./jbi.xsd">
+    <service-assembly>
+        <identification>
+            <name>AuthCompositeApp</name>
+            <description>Represents the Service Assembly of AuthCompositeApp</description>
+        </identification>
+        <service-unit>
+            <identification>
+                <name>AuthCompositeApp-AuthBPEL</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>AuthBPEL.jar</artifacts-zip>
+                <component-name>sun-bpel-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>AuthCompositeApp-AuthService</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>AuthService.jar</artifacts-zip>
+                <component-name>sun-javaee-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>AuthCompositeApp-sun-http-binding</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>sun-http-binding.jar</artifacts-zip>
+                <component-name>sun-http-binding</component-name>
+            </target>
+        </service-unit>
+        <connections>
+            <connection>
+                <consumer endpoint-name="casaPort1" service-name="ns1:AuthCompositeAppService1"/>
+                <provider endpoint-name="ClientAuthWSDLPortTypeRole_myRole" service-name="ns2:Client"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="AuthWSDLRole_partnerRole" service-name="ns2:AuthServiceWSDL"/>
+                <provider endpoint-name="javaee_AuthWSDLPort" service-name="ns3:AuthWSDLService"/>
+            </connection>
+        </connections>
+    </service-assembly>
+</jbi>

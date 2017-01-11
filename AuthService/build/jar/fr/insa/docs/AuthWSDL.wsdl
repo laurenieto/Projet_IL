@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="AuthWSDL" targetNamespace="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" xmlns:ns0="http://xml.netbeans.org/schema/AuthReply" xmlns:ns="http://xml.netbeans.org/schema/AuthRequest">
+    <types>
+        <xsd:schema targetNamespace="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL">
+            <xsd:import namespace="http://xml.netbeans.org/schema/AuthRequest" schemaLocation="AuthRequest.xsd"/>
+            <xsd:import namespace="http://xml.netbeans.org/schema/AuthReply" schemaLocation="AuthReply.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="getAuthOperationRequest">
+        <part name="userInfo" element="ns:AuthRequest"/>
+    </message>
+    <message name="getAuthOperationResponse">
+        <part name="isInDBReply" element="ns0:AuthReply"/>
+    </message>
+    <portType name="AuthWSDLPortType">
+        <operation name="getAuthOperation">
+            <input name="input1" message="tns:getAuthOperationRequest"/>
+            <output name="output1" message="tns:getAuthOperationResponse"/>
+        </operation>
+    </portType>
+</definitions>
+

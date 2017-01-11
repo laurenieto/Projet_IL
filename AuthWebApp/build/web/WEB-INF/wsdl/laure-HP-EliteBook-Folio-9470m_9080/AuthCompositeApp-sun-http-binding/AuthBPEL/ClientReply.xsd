@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/ClientReply"
+    xmlns:tns="http://xml.netbeans.org/schema/ClientReply"
+    elementFormDefault="qualified">
+    <xsd:element name="ClientReply" type="tns:ClientReplyType"/>
+    <xsd:complexType name="ClientReplyType">
+        <xsd:sequence>
+            <xsd:element name="isInDBReplyClient" type="xsd:boolean"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

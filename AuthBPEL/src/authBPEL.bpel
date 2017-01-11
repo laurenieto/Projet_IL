@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process
+    name="authBPEL"
+    targetNamespace="http://enterprise.netbeans.org/bpel/AuthBPEL/authBPEL"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/AuthBPEL/authBPEL"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:sxed2="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2" xmlns:ns0="http://xml.netbeans.org/schema/ClienRequest" xmlns:ns1="http://xml.netbeans.org/schema/AuthRequest" xmlns:ns2="http://xml.netbeans.org/schema/AuthReply" xmlns:ns3="http://xml.netbeans.org/schema/ClientReply">
+    <import namespace="http://xml.netbeans.org/schema/FinalReply" location="FinalReply.xsd" importType="http://www.w3.org/2001/XMLSchema"/>
+    <import namespace="http://j2ee.netbeans.org/wsdl/AuthBPEL/ClientAuthWSDL" location="ClientAuthWSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/AuthWSDLWrapper" location="AuthWSDLWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" location="AuthService/fr/insa/docs/AuthWSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="AuthServiceWSDL" xmlns:tns="http://enterprise.netbeans.org/bpel/AuthWSDLWrapper" partnerLinkType="tns:AuthWSDLLinkType" partnerRole="AuthWSDLRole"/>
+        <partnerLink name="Client" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthBPEL/ClientAuthWSDL" partnerLinkType="tns:ClientAuthWSDL" myRole="ClientAuthWSDLPortTypeRole"/>
+    </partnerLinks>
+    <variables>
+        <variable name="isInDBReply" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthBPEL/ClientAuthWSDL" messageType="tns:getClientAuthOperationResponse"/>
+        <variable name="IsInDBFromService" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" messageType="tns:getAuthOperationResponse"/>
+        <variable name="infoForAuth" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" messageType="tns:getAuthOperationRequest"/>
+        <variable name="inputDataForServices" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthBPEL/ClientAuthWSDL" messageType="tns:getClientAuthOperationRequest"/>
+    </variables>
+    <sequence>
+        <receive name="ReceiveFromClient" createInstance="yes" partnerLink="Client" operation="getClientAuthOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthBPEL/ClientAuthWSDL" portType="tns:ClientAuthWSDLPortType" variable="inputDataForServices"/>
+        <assign name="Assign1">
+            <copy>
+                <from>$inputDataForServices.clientReq/ns0:username</from>
+                <to>$infoForAuth.userInfo/ns1:username</to>
+            </copy>
+            <copy>
+                <from>$inputDataForServices.clientReq/ns0:password</from>
+                <to>$infoForAuth.userInfo/ns1:password</to>
+            </copy>
+        </assign>
+        <invoke name="InvokeAuthService" partnerLink="AuthServiceWSDL" operation="getAuthOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" portType="tns:AuthWSDLPortType" inputVariable="infoForAuth" outputVariable="IsInDBFromService"/>
+        <assign name="Assign2">
+            <copy>
+                <from>$IsInDBFromService.isInDBReply/ns2:isInDBReply</from>
+                <to>$isInDBReply.clientRep/ns3:isInDBReplyClient</to>
+            </copy>
+        </assign>
+        <reply name="Reply" partnerLink="Client" operation="getClientAuthOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthBPEL/ClientAuthWSDL" portType="tns:ClientAuthWSDLPortType" variable="isInDBReply"/>
+    </sequence>
+</process>
+

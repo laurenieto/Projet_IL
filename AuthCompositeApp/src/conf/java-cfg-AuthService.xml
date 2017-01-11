@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<javaee-project xmlns="http://java.sun.com/xml/ns/jbi/javaee/config/1/" xmlns:ns0="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" name="AuthService">
+    <services>
+        <provides enable-for-javaee-http="true" endpoint-name="javaee_AuthWSDLPort" interface-name="ns0:NewWebServiceFromWSDL" service-name="ns0:AuthWSDLService"/>
+        <provides enable-for-javaee-http="true" endpoint-name="javaee_AuthWSDLPort" interface-name="ns0:AuthWSDLPortType" service-name="ns0:AuthWSDLService"/>
+        <consumes enable-for-nmr="true" endpoint-name="javaee_AuthWSDLPort" interface-name="ns0:AuthWSDLPortType" service-name="ns0:AuthWSDLService"/>
+    </services>
+</javaee-project>

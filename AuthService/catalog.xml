@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/home/laure/NetBeansProjects/Projet_IL/AuthService/src/java/fr/insa/docs/AuthWSDL.wsdl" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/AuthWSDL.wsdl"/>
+    <system systemId="file:/home/laure/NetBeansProjects/Projet_IL/AuthService/src/java/fr/insa/docs/AuthRequest.xsd" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/AuthRequest.xsd"/>
+    <system systemId="file:/home/laure/NetBeansProjects/Projet_IL/AuthService/src/java/fr/insa/docs/AuthReply.xsd" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/AuthReply.xsd"/>
+</catalog>
+
