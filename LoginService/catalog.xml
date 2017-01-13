@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="file:/home/laure/NetBeansProjects/Projet_IL/LoginService/src/java/fr/insa/docs/LoginWSDL.wsdl" uri="src/conf/xml-resources/web-services/LoginWS/wsdl/LoginWSDL.wsdl"/>
-    <system systemId="file:/home/laure/NetBeansProjects/Projet_IL/LoginService/src/java/fr/insa/docs/LoginReply.xsd" uri="src/conf/xml-resources/web-services/LoginWS/wsdl/LoginReply.xsd"/>
-    <system systemId="file:/home/laure/NetBeansProjects/Projet_IL/LoginService/src/java/fr/insa/docs/LoginRequest.xsd" uri="src/conf/xml-resources/web-services/LoginWS/wsdl/LoginRequest.xsd"/>
-</catalog>

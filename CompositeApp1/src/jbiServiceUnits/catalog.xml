@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="AuthService/fr/insa/docs/AuthWSDL.wsdl" uri="AuthBPEL/src/_references/_projects/AuthService/src/java/fr/insa/docs/AuthWSDL.wsdl"/>
+    <system systemId="AuthRequest.xsd" uri="AuthBPEL/src/_references/_projects/AuthService/src/java/fr/insa/docs/AuthRequest.xsd"/>
+    <system systemId="AuthReply.xsd" uri="AuthBPEL/src/_references/_projects/AuthService/src/java/fr/insa/docs/AuthReply.xsd"/>
+</catalog>

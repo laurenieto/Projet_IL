@@ -32,9 +32,9 @@ public interface AuthWSDLPortType {
      * @return
      *     returns org.netbeans.xml.schema.authreply.AuthReplyType
      */
-    @WebMethod(action = "getAuthOperation_action")
-    @WebResult(name = "AuthReply", targetNamespace = "http://xml.netbeans.org/schema/AuthReply", partName = "isInDBReply")
-    public AuthReplyType getAuthOperation(
+    @WebMethod(operationName = "AuthWSDLOperation", action = "AuthWSDLOperation_action")
+    @WebResult(name = "AuthReply", targetNamespace = "http://xml.netbeans.org/schema/AuthReply", partName = "isInDB")
+    public AuthReplyType authWSDLOperation(
         @WebParam(name = "AuthRequest", targetNamespace = "http://xml.netbeans.org/schema/AuthRequest", partName = "userInfo")
         AuthRequestType userInfo);
 

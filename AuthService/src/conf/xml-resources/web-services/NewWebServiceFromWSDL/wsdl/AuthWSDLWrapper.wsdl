@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" xmlns:ns0="http://xml.netbeans.org/schema/AuthReply" xmlns:ns="http://xml.netbeans.org/schema/AuthRequest" name="AuthWSDL" targetNamespace="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" xmlns:ns0="http://xml.netbeans.org/schema/AuthReply" xmlns:ns="http://xml.netbeans.org/schema/AuthRequest" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="AuthWSDL" targetNamespace="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL">
 <wsdl:import namespace="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" location="AuthWSDL.wsdl"/>
 <wsdl:binding name="AuthWSDLBinding" type="tns:AuthWSDLPortType">
 <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<wsdl:operation name="getAuthOperation">
-<soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="getAuthOperation_action"/>
+<wsdl:operation name="AuthWSDLOperation">
+<soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="AuthWSDLOperation_action"/>
 <wsdl:input name="input1">
 <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
 </wsdl:input>

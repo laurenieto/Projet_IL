@@ -1,4 +1,0 @@
-Bundle-Name: LoginCompositeApp
-Bundle-SymbolicName: LoginCompositeApp
-Bundle-ManifestVersion: 2
-Bundle-Version: 1.0.0

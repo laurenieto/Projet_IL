@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:9080/CompositeApp1Service1/casaPort1?wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1/wsdl/localhost_9080/CompositeApp1Service1/casaPort1.wsdl"/>
+    <system systemId="http://laure-HP-EliteBook-Folio-9470m:9080/CompositeApp1-sun-http-binding/AuthBPEL/ClientAuthWSDL.wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1/wsdl/laure-HP-EliteBook-Folio-9470m_9080/CompositeApp1-sun-http-binding/AuthBPEL/ClientAuthWSDL.wsdl"/>
+    <system systemId="http://laure-HP-EliteBook-Folio-9470m:9080/CompositeApp1-sun-http-binding/AuthBPEL/ClientReply.xsd" uri="src/conf/xml-resources/web-service-references/casaPort1/wsdl/laure-HP-EliteBook-Folio-9470m_9080/CompositeApp1-sun-http-binding/AuthBPEL/ClientReply.xsd"/>
+    <system systemId="http://laure-HP-EliteBook-Folio-9470m:9080/CompositeApp1-sun-http-binding/AuthBPEL/ClientRequest.xsd" uri="src/conf/xml-resources/web-service-references/casaPort1/wsdl/laure-HP-EliteBook-Folio-9470m_9080/CompositeApp1-sun-http-binding/AuthBPEL/ClientRequest.xsd"/>
+</catalog>

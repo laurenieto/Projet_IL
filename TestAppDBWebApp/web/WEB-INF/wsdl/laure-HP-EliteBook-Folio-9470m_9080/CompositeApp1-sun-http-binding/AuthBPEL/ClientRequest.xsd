@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/ClienRequest"
+    xmlns:tns="http://xml.netbeans.org/schema/ClienRequest"
+    elementFormDefault="qualified">
+    <xsd:element name="ClientRequest" type="tns:ClienRequestType"/>
+    <xsd:complexType name="ClienRequestType">
+        <xsd:sequence>
+            <xsd:element name="username" type="xsd:string"/>
+            <xsd:element name="password" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

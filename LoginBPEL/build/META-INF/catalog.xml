@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="LoginService/fr/insa/docs/LoginWSDL.wsdl" uri="src/_references/_projects/LoginService/src/java/fr/insa/docs/LoginWSDL.wsdl"/>
-    <system systemId="LoginReply.xsd" uri="src/_references/_projects/LoginService/src/java/fr/insa/docs/LoginReply.xsd"/>
-    <system systemId="LoginRequest.xsd" uri="src/_references/_projects/LoginService/src/java/fr/insa/docs/LoginRequest.xsd"/>
-</catalog>
