@@ -5,8 +5,8 @@
         <data xmlns="http://www.netbeans.org/ns/j2ee-jbi/1">
             <name>CompositeApp1</name>
             <minimum-ant-version>1.6</minimum-ant-version>
-            <included-library>reference.AuthService.dist</included-library>
             <included-library>reference.AuthBPEL.dist_se</included-library>
+            <included-library>reference.AuthService.dist</included-library>
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
             <reference>

@@ -31,8 +31,8 @@ public class NewWebServiceFromWSDL implements AuthWSDLPortType {
         String password = "salope1";
         boolean rep = false;
         try {
-            String username = "Laur";//userInfo.getPassword();
-            String pwd = "pwd";//userInfo.getUsername();
+            String username = userInfo.getPassword();
+            String pwd = userInfo.getUsername();
             String sql_str = "SELECT username, password FROM student WHERE username= '"+username+ "' AND password='" + pwd + "'";
             Class.forName(driverName);
             con = DriverManager.getConnection(url, user, password);
@@ -50,14 +50,8 @@ public class NewWebServiceFromWSDL implements AuthWSDLPortType {
 
             if (rowcount != 0){
                 rep=true;
+
             }
-
-            /*
-            while (rs.next()){
-
-                username = rs.getString("username");
-                pwd = rs.getString("password");
-            }*/
         }
         catch (Exception ex) {System.out.print(ex);}
         org.netbeans.xml.schema.authreply.AuthReplyType reply = new org.netbeans.xml.schema.authreply.AuthReplyType();

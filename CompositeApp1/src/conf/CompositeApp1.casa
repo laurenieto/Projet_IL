@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="CompositeApp1" xmlns:ns2="http://j2ee.netbeans.org/wsdl/AuthBPEL/ClientAuthWSDL" xmlns:ns3="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" xmlns:ns4="http://enterprise.netbeans.org/bpel/AuthBPEL/authBPEL" xmlns:xlink="http://www.w3.org/2000/xlink">
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="CompositeApp1" xmlns:ns2="http://j2ee.netbeans.org/wsdl/AuthBPEL/ClientAuthWSDL" xmlns:ns3="http://enterprise.netbeans.org/bpel/AuthBPEL/authBPEL" xmlns:ns4="http://j2ee.netbeans.org/wsdl/AuthService/AuthWSDL" xmlns:xlink="http://www.w3.org/2000/xlink">
     <endpoints>
         <endpoint endpoint-name="casaPort1" interface-name="ns2:ClientAuthWSDLPortType" name="endpoint1" service-name="ns1:CompositeApp1Service1"/>
-        <endpoint endpoint-name="javaee_AuthWSDLPort" interface-name="ns3:AuthWSDLPortType" name="endpoint2" service-name="ns3:AuthWSDLService"/>
-        <endpoint display-name="Client" endpoint-name="ClientAuthWSDLPortTypeRole_myRole" file-path="authBPEL.bpel" interface-name="ns2:ClientAuthWSDLPortType" name="endpoint3" process-name="authBPEL" service-name="ns4:Client"/>
-        <endpoint display-name="PartnerLink1" endpoint-name="AuthWSDLPortTypeRole_partnerRole" file-path="authBPEL.bpel" interface-name="ns3:AuthWSDLPortType" name="endpoint4" process-name="authBPEL" service-name="ns4:PartnerLink1"/>
+        <endpoint display-name="Client" endpoint-name="ClientAuthWSDLPortTypeRole_myRole" file-path="authBPEL.bpel" interface-name="ns2:ClientAuthWSDLPortType" name="endpoint2" process-name="authBPEL" service-name="ns3:Client"/>
+        <endpoint display-name="PartnerLink1" endpoint-name="AuthWSDLPortTypeRole_partnerRole" file-path="authBPEL.bpel" interface-name="ns4:AuthWSDLPortType" name="endpoint3" process-name="authBPEL" service-name="ns3:PartnerLink1"/>
+        <endpoint endpoint-name="javaee_AuthWSDLPort" interface-name="ns4:AuthWSDLPortType" name="endpoint4" service-name="ns4:AuthWSDLService"/>
     </endpoints>
     <service-units>
-        <service-engine-service-unit artifacts-zip="AuthService.jar" component-name="sun-javaee-engine" defined="true" description="Represents this Service Unit" internal="true" name="CompositeApp1-AuthService" unit-name="AuthService" unknown="false" x="131" y="181">
+        <service-engine-service-unit artifacts-zip="AuthBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="CompositeApp1-AuthBPEL" unit-name="AuthBPEL" unknown="false" x="146" y="181">
             <provides endpoint="endpoint2"/>
+            <consumes endpoint="endpoint3"/>
         </service-engine-service-unit>
-        <service-engine-service-unit artifacts-zip="AuthBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="CompositeApp1-AuthBPEL" unit-name="AuthBPEL" unknown="false" x="137" y="56">
-            <provides endpoint="endpoint3"/>
-            <consumes endpoint="endpoint4"/>
+        <service-engine-service-unit artifacts-zip="AuthService.jar" component-name="sun-javaee-engine" defined="true" description="Represents this Service Unit" internal="true" name="CompositeApp1-AuthService" unit-name="AuthService" unknown="false" x="131" y="97">
+            <provides endpoint="endpoint4"/>
         </service-engine-service-unit>
         <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="CompositeApp1-sun-http-binding" unit-name="sun-http-binding">
             <ports>
-                <port bindingType="soap" x="67" y="191">
+                <port bindingType="soap" x="67" y="218">
                     <link xlink:href="../jbiasa/CompositeApp1.wsdl#xpointer(/definitions/service[@name='CompositeApp1Service1']/port[@name='casaPort1'])" xlink:type="simple"/>
                     <consumes endpoint="endpoint1"/>
                     <provides endpoint="endpoint1"/>
@@ -25,8 +25,8 @@
         </binding-component-service-unit>
     </service-units>
     <connections>
-        <connection consumer="endpoint1" provider="endpoint3" state="new"/>
-        <connection consumer="endpoint4" provider="endpoint2" state="unchanged"/>
+        <connection consumer="endpoint1" provider="endpoint2" state="new"/>
+        <connection consumer="endpoint3" provider="endpoint4" state="unchanged"/>
     </connections>
     <porttypes>
         <link xlink:href="../jbiasa/CompositeApp1.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
