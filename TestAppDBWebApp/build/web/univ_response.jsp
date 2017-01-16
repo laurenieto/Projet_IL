@@ -14,14 +14,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>University profile</h1>
-        <% 
+        <h1 align="center"> <font face="Courier" </font>University profile</h1>
+        <%
+
            String id_univ = request.getParameter("id_univ");
            String id_student = request.getParameter("id_student");
-          
-           Client cl = Client.create();
-           WebResource r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/apply?id_student="+id_student+"&id_univ="+id_univ);
-           r.put(String.class);
+           String insert = request.getParameter("insert_appliance");
+           if (insert.equals("1")){
+              
+               insert = "0";
+               Client cl_apply = Client.create();
+               WebResource r_apply = cl_apply.resource("http://localhost:8080/TestAppDBWebApp/resources/apply?id_student="+id_student+"&id_univ="+id_univ);
+               r_apply.put(String.class);
+          }
        %>
        <h2>Student who applied</h2>
        <form name="formAccept" action="" method="POST">
@@ -34,8 +39,8 @@
         if (request.getParameter("accept") != null) {
            id_student = request.getParameter("id_student");
            id_univ = request.getParameter("id_univ");
-           cl = Client.create();
-           r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/seeAcceptUniv?id_student="+id_student+"&id_univ="+id_univ);
+           Client cl = Client.create();
+           WebResource r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/studentAccepted?id_student="+id_student+"&id_univ="+id_univ);
            r.put(String.class);
             //inserer truz dans la db
         }   

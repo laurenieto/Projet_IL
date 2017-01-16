@@ -1,8 +1,9 @@
 <%-- 
-    Document   : after_submit
-    Created on : Jan 11, 2017, 8:58:51 AM
+    Document   : list_courses
+    Created on : Jan 16, 2017, 7:50:54 PM
     Author     : laure
 --%>
+
 <%@page import="com.sun.jersey.api.client.Client,com.sun.jersey.api.client.WebResource"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -17,11 +18,8 @@
     <body>
         <%!String id_student; String username;%>
         <h1 align="center"> <font face="Courier" </font>Manage students' travels</h1>
-   
-         <%
-            username = request.getParameter("username_");
-            String password = request.getParameter("password_");
-          %>
+
+     
           <h2>Hello <%out.print(username);%></h2>
           <%
 
@@ -29,20 +27,20 @@
                 WebResource r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/apply?username="+username+"&password="+password);
 
                 id_student = r.get(String.class);
-              
+
           %>
         <form action="" method="POST">
             <h3> Search a university (by name) </h3> <br> Please let an empty field to display all universities.<br><br>
             <input type="text" name="univ" />
             <input type="SUBMIT" value="OK"/>
         </form>
-        
+
 
            <%
-           
+
             if (request.getParameter("univ") != null) {
-             
-                
+
+
                 String param = request.getParameter("univ");
 
                 Client c1_univ = Client.create();
@@ -56,26 +54,26 @@
                 Integer taille = Integer.parseInt(c[0]);
                 //////////////
 
-                parser.Table_Univ[] Table = new parser.Table_Univ[taille] ;
+                parser.Table_Course[] Table = new parser.Table_Course[taille] ;
 
                 // PARSING !
-                Table = parser.ParserLolo.parse(r_univ.get(String.class));
-               
+                Table = parser.ParserCours.parse(r_univ.get(String.class));
+
 
                 if (Table != null) {
 
-                    for(parser.Table_Univ univ : Table)
+                    for(parser.Table_Course cours : Table)
                         {
                            %>
             <form action="univ_response.jsp" method="get" target="_blank" >
-                <%out.println(univ.getName()+" | "+univ.getCountry());%>
-                <input name=<%out.print(univ.getId());%> type="submit" value="Apply">
+                <%out.println(cours.getCourseName()+" | "+cours.getNbHours());%>
+                <input name=<%out.print(cours.getId());%> type="submit" value="Apply">
                 <input type="hidden"  name="id_student" value=<%out.print(id_student);%>>
                 <input type="hidden"  name="id_univ" value=<%out.print(univ.getId());%>>
                 <input type="hidden"  name="insert_appliance" value="1">
             </form>
-                <%          
-                  
+                <%
+
                         }
                     }
                 }
@@ -92,16 +90,6 @@
             id_student = request.getParameter("id_student");
             r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/seeAcceptUniv?id_student="+id_student);
             out.print(r.get(String.class));
-            %>
-            <form action="list_courses.jsp" method="get" target="_blank" >
-
-                <input type="submit" value="Choose courses">
-                <input type="hidden"  name="id_student" value=<%out.print(id_student);%>>
-                <input type="hidden"  name="id_univ" value=<%out.print(univ.getId());%>>
-             <%//IL FAUT FAIRE UN PARSER POUR ADFFICHER UNIV AUXQUELLES ON A POSTULE %>
-                <input type="hidden"  name="insert_appliance" value="1">
-            </form>
-            <%
         }
         %>
     </body>

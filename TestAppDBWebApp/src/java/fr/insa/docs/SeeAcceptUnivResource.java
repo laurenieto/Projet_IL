@@ -8,8 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
@@ -49,7 +47,7 @@ public class SeeAcceptUnivResource {
         String res="";
         int id_st = Integer.parseInt(id_student);
         try {
-          
+
             String sql_str = "SELECT s.university_id, univ.univName, univ.city, univ.country FROM student_university s, university univ  WHERE s.univResponse=1 and s.university_id = univ.id_university and s.student_id='"+id_st+"'";
 
             Connection con = ConnectToDB.connect();

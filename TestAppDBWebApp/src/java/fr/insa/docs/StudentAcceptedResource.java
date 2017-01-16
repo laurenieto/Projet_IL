@@ -52,24 +52,26 @@ public class StudentAcceptedResource {
      */
     @PUT
     @Consumes("application/xml")
-    public void putXml(@QueryParam("id_student") String id_student, @QueryParam("id_univ") String id_univ) {
+    public String putXml(@QueryParam("id_student") String id_student, @QueryParam("id_univ") String id_univ) {
           PreparedStatement ps = null;
-
+          String res = "";
         try {
+         
             int id_st_int = Integer.parseInt(id_student);
             int id_univ_int = Integer.parseInt(id_univ);
             String sql_str = "UPDATE student_university SET univResponse = 1 WHERE student_id=" +id_st_int+ " and university_id=" + id_univ_int;
-
+           
             Connection con = ConnectToDB.connect();
             ps = con.prepareStatement(sql_str);
-
             ps.executeUpdate();
-            
+
+           
+
         } catch (SQLException ex) {
             Logger.getLogger(ApplyResource.class.getName()).log(Level.SEVERE, null, ex);
-        
+            return ex.toString();
         }
-
-    
+            
+        return res;
     }
 }
