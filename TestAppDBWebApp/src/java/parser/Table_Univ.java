@@ -18,7 +18,6 @@ public class Table_Univ {
         new_univ.Adress = Adress ;
         new_univ.City = City ;
         new_univ.Country = Country ;
-        new_univ.Courses_ID = Courses_ID ;
         new_univ.Email = Email ;
         new_univ.Id = Id ;
         new_univ.Name = Name ;
@@ -50,14 +49,6 @@ public class Table_Univ {
 
     public void setCountry(String Country) {
         this.Country = Country;
-    }
-
-    public Integer getCourses_ID() {
-        return Courses_ID;
-    }
-
-    public void setCourses_ID(Integer Courses_ID) {
-        this.Courses_ID = Courses_ID;
     }
 
     public String getEmail() {
@@ -108,9 +99,8 @@ public class Table_Univ {
   String Email;
   String Phone;
   String Nb_Place;
-  Integer Courses_ID;
 
-  public Table_Univ(Integer Id, String Name, String Country, String City, String Adress, String Email, String Phone,String Nb_Place, Integer Courses_ID){
+  public Table_Univ(Integer Id, String Name, String Country, String City, String Adress, String Email, String Phone,String Nb_Place){
       // This constructor has one parameter, name.
       this.Id=Id;
       this.Name=Name;
@@ -120,12 +110,11 @@ public class Table_Univ {
       this.Email = Email;
       this.Phone = Phone;
       this.Nb_Place = Nb_Place;
-      this.Courses_ID = Courses_ID;
    }
 
     @Override
     public String toString() {
-        return "Table_Univ{" + "Id=" + Id + ", Name=" + Name + ", Country=" + Country + ", City=" + City + ", Adress=" + Adress + ", Email=" + Email + ", Phone=" + Phone + ", Nb_Place=" + Nb_Place + ", Courses_ID=" + Courses_ID + '}';
+        return "Table_Univ{" + "Id=" + Id + ", Name=" + Name + ", Country=" + Country + ", City=" + City + ", Adress=" + Adress + ", Email=" + Email + ", Phone=" + Phone + ", Nb_Place=" + Nb_Place + '}';
     }
 
 

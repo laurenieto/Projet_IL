@@ -50,7 +50,7 @@
 
                 System.out.println("|"+r_univ.get(String.class)+"|");
 
-                 // ATTENTION CODE DEGUEULASSE
+                
                 String chaine = r_univ.get(String.class);
                 String[] c = chaine.split("=");
                 Integer taille = Integer.parseInt(c[0]);
@@ -82,27 +82,53 @@
         %>
         <br/><br/><br/><br/>
         <form action="" method="POST">
-            Display universities which accept my appliance<input name="refresh_button" type="submit" value="Display">
+            Display universities which accepted my appliance<input name="refresh_button" type="submit" value="Display">
             <input type="hidden"  name="id_student" value=<%out.print(id_student);%>>
             <input type="hidden"  name="username" value=username>
+            
         </form>
         <%
         if (request.getParameter("refresh_button") != null) {
-            username = request.getParameter("username");
-            id_student = request.getParameter("id_student");
-            r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/seeAcceptUniv?id_student="+id_student);
-            out.print(r.get(String.class));
-            %>
-            <form action="list_courses.jsp" method="get" target="_blank" >
+               
+                username = request.getParameter("username");
+                id_student = request.getParameter("id_student");
+                Client cl_ = Client.create();
 
+                WebResource r_ = cl_.resource("http://localhost:8080/TestAppDBWebApp/resources/seeAcceptUniv?id_student="+id_student);
+
+                System.out.println("|"+r_.get(String.class)+"|");
+
+                 // ATTENTION CODE DEGUEULASSE
+                String chaine = r_.get(String.class);
+                String[] c = chaine.split("=");
+                Integer taille = Integer.parseInt(c[0]);
+                //////////////
+
+                parser.Table_Univ[] Table = new parser.Table_Univ[taille] ;
+
+                // PARSING !
+                Table = parser.ParserLolo.parse(r_.get(String.class));
+
+                if (Table != null) {
+
+                    for(parser.Table_Univ univ : Table)
+                        {
+
+            %>
+            <form action="list_courses.jsp" method="POST" target="_blank" >
+                <%out.println(univ.getName()+" | "+univ.getCountry());%>
                 <input type="submit" value="Choose courses">
                 <input type="hidden"  name="id_student" value=<%out.print(id_student);%>>
                 <input type="hidden"  name="id_univ" value=<%out.print(univ.getId());%>>
              <%//IL FAUT FAIRE UN PARSER POUR ADFFICHER UNIV AUXQUELLES ON A POSTULE %>
                 <input type="hidden"  name="insert_appliance" value="1">
             </form>
+                <br/>
             <%
-        }
+
+                        }
+                    }
+                }
         %>
     </body>
 </html>

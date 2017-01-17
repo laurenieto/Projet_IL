@@ -22,14 +22,14 @@ public class ParserCours {
         Table_Course[] results=null;
         System.out.print(Integer.parseInt(items[0]));
             if(Integer.parseInt(items[0])!=0){
-            System.out.print("je suis la");
+       
             results = new Table_Course[Integer.parseInt(items[0])];
-            System.out.println("coucou");
+          
             Table_Course u = new Table_Course();
-            System.out.println("prout");
+           
             for (int i = 0; i < Integer.parseInt(items[0]) ; i++) {
                 try {
-                    System.out.println("KAK["+i+"]");
+                  
                     u.setId(Integer.parseInt(items[3*i+1]));
                     u.setCourseName(items[3*i+2]);
                     u.setNbHours(Integer.parseInt(items[3*i+3]));

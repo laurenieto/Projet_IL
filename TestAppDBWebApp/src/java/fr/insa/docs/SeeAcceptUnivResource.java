@@ -4,7 +4,7 @@
  */
 
 package fr.insa.docs;
-import java.sql.Connection;
+import univ.list.fr.testrequete;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,26 +42,23 @@ public class SeeAcceptUnivResource {
     @Produces("text/plain")
     public String getXml(@QueryParam("id_student") String id_student) {
         //TODO return proper representation object
-        PreparedStatement ps = null;
         ResultSet rs = null;
-        String res="";
+        String resultat="";
+        int size= 0;
         int id_st = Integer.parseInt(id_student);
         try {
 
-            String sql_str = "SELECT s.university_id, univ.univName, univ.city, univ.country FROM student_university s, university univ  WHERE s.univResponse=1 and s.university_id = univ.id_university and s.student_id='"+id_st+"'";
+            String sql_str = "SELECT s.university_id, univ.univName, univ.city, univ.country, univ.email, univ.telephone, univ.address, univ.nbPlaces FROM student_university s, university univ  WHERE s.univResponse=1 and s.university_id = univ.id_university and s.student_id='"+id_st+"'";
 
-            Connection con = ConnectToDB.connect();
-         
-            ps = con.prepareStatement(sql_str);
-
-            rs = ps.executeQuery();
+            rs = testrequete.envoi_requete(sql_str);
             while (rs.next()){
-                res = rs.getString("univName")+ " in " + rs.getString("country")+", "+rs.getString("city");
+                size++ ;
+                resultat = resultat+rs.getString("s.university_id")+"="+rs.getString("univ.univName")+"="+rs.getString("univ.country")+"="+rs.getString("univ.city")+"="+rs.getString("univ.address")+"="+rs.getString("univ.email")+"="+rs.getString("univ.telephone")+"="+rs.getString("univ.nbPlaces")+"=";
             }
         } catch (SQLException ex) {
             Logger.getLogger(ApplyResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return res;
+        return size+"="+resultat;
     }
 
     /**

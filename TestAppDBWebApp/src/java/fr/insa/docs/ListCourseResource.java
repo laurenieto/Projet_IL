@@ -44,11 +44,11 @@ public class ListCourseResource {
        ResultSet rs = null;
        String resultat = "";
        int id_univ_int = Integer.parseInt(id_univ);
-       rs = testrequete.envoi_requete("SELECT co.id_course, co.courseName, co.nbHours FROM courses co, university u WHERE u.id_university="+id_univ_int + " and u.id_university = co.id_course");
+       rs = testrequete.envoi_requete("SELECT co.id_course, co.courseName, co.nbHours FROM courses co, university u,  courses_univ co_u  WHERE u.id_university=1 and co.id_course=co_u.courses_id and co_u.univ_id=u.id_university");
 
        while (rs.next()){
            size++ ;
-           resultat=(resultat+rs.getString("id_course")+"="+rs.getString("courseName")+"="+rs.getString("nbHours")+"=");
+           resultat=(resultat+rs.getString("co.id_course")+"="+rs.getString("co.courseName")+"="+rs.getString("co.nbHours")+"=");
        }
 
            return size+"="+resultat;

@@ -54,7 +54,7 @@ public class univ {
 
        while (rs.next()){
            size++ ;
-           resultat=(resultat+rs.getString("id_university")+"="+rs.getString("univName")+"="+rs.getString("country")+"="+rs.getString("city")+"="+rs.getString("address")+"="+rs.getString("email")+"="+rs.getString("telephone")+"="+rs.getString("nbPlaces")+"="+rs.getString("course_id")+"=");
+           resultat=(resultat+rs.getString("id_university")+"="+rs.getString("univName")+"="+rs.getString("country")+"="+rs.getString("city")+"="+rs.getString("address")+"="+rs.getString("email")+"="+rs.getString("telephone")+"="+rs.getString("nbPlaces")+"=");
        }
 
            return size+"="+resultat;
