@@ -7,6 +7,8 @@ package fr.insa.docs;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import univ.list.fr.testrequete;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -20,32 +22,34 @@ import javax.ws.rs.QueryParam;
 /**
  * REST Web Service
  *
- * @author 
- * This allow to list all the course of an university, giving its id.
- *
+ * @author
+ * This service allows to list the learning of a student for an university,
+ * giving the id of both.
  */
 
-@Path("listCourse")
-public class ListCourseResource {
+@Path("listLearning")
+public class ListLearningResource {
     @Context
     private UriInfo context;
 
-    /** Creates a new instance of ListCourseResource */
-    public ListCourseResource() {
+    /** Creates a new instance of ListLearningResource */
+    public ListLearningResource() {
     }
 
     /**
-     * Retrieves representation of an instance of fr.insa.docs.ListCourseResource
+     * Retrieves representation of an instance of fr.insa.docs.ListLearningResource
      * @return an instance of java.lang.String
      */
     @GET
     @Produces("text/plain")
-    public String getCourses(@QueryParam("id_univ") String id_univ) throws SQLException {
+    public String getLearning(@QueryParam("id_univ") String id_univ, @QueryParam("id_student") String id_student) throws SQLException {
        int size= 0;
+   
        ResultSet rs = null;
        String resultat = "";
        int id_univ_int = Integer.parseInt(id_univ);
-       rs = testrequete.envoi_requete("SELECT co.id_course, co.courseName, co.nbHours FROM courses co, university u,  courses_univ co_u  WHERE co.id_course=co_u.courses_id and co_u.univ_id=u.id_university and u.id_university="+id_univ_int);
+       int id_student_int = Integer.parseInt(id_student);
+       rs = testrequete.envoi_requete("SELECT co.id_course, co.courseName, co.nbHours FROM courses co, student_courses st_c WHERE st_c.student_id ="+ id_student_int+ " and st_c.university_id="+ id_univ_int+" and co.id_course = st_c.courses_id");
 
        while (rs.next()){
            size++ ;
@@ -56,9 +60,8 @@ public class ListCourseResource {
 
     }
 
-
     /**
-     * PUT method for updating or creating an instance of ListCourseResource
+     * PUT method for updating or creating an instance of ListLearningResource
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */

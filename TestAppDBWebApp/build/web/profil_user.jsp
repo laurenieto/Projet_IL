@@ -15,22 +15,17 @@
         <title>Manage students' travels</title>
     </head>
     <body>
-        <%!String id_student; String username;%>
+        <%!String id_student;%>
         <h1 align="center"> <font face="Courier" </font>Manage students' travels</h1>
    
          <%
-            username = request.getParameter("username_");
-            String password = request.getParameter("password_");
-          %>
-          <h2>Hello <%out.print(username);%></h2>
-          <%
-
-                Client cl = Client.create();
-                WebResource r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/apply?username="+username+"&password="+password);
-
-                id_student = r.get(String.class);
-              
-          %>
+                id_student = request.getParameter("id_student");
+                Client c1_st = Client.create();
+                WebResource r_st = c1_st.resource("http://localhost:8080/TestAppDBWebApp/resources/listStudent?id_student="+id_student);
+                String name = r_st.get(String.class);
+       %>
+          <h2>Hello <%out.print(name);%></h2>
+         
         <form action="" method="POST">
             <h3> Search a university (by name) </h3> <br> Please let an empty field to display all universities.<br><br>
             <input type="text" name="univ" />
@@ -84,13 +79,13 @@
         <form action="" method="POST">
             Display universities which accepted my appliance<input name="refresh_button" type="submit" value="Display">
             <input type="hidden"  name="id_student" value=<%out.print(id_student);%>>
-            <input type="hidden"  name="username" value=username>
-            
+            <input type="hidden"  name="name" value=name>            
         </form>
+        <br/>
         <%
         if (request.getParameter("refresh_button") != null) {
                
-                username = request.getParameter("username");
+                name = request.getParameter("name");
                 id_student = request.getParameter("id_student");
                 Client cl_ = Client.create();
 
@@ -116,19 +111,48 @@
 
             %>
             <form action="list_courses.jsp" method="POST" target="_blank" >
+                <br/>
                 <%out.println(univ.getName()+" | "+univ.getCountry());%>
                 <input type="submit" value="Choose courses">
+                
                 <input type="hidden"  name="id_student" value=<%out.print(id_student);%>>
                 <input type="hidden"  name="id_univ" value=<%out.print(univ.getId());%>>
-             <%//IL FAUT FAIRE UN PARSER POUR ADFFICHER UNIV AUXQUELLES ON A POSTULE %>
+                <input type="hidden" name="univ_name" value=<%out.print(univ.getName());%>>     
                 <input type="hidden"  name="insert_appliance" value="1">
             </form>
-                <br/>
-            <%
+           Your actual learning:
+           <%         
 
+                Client cl = Client.create();
+                WebResource r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/listLearning?id_univ="+ univ.getId()+"&id_student="+id_student);
+
+
+                String chaine_learning = r.get(String.class);
+                String[] c_learning = chaine_learning.split("=");
+                Integer taille_learning = Integer.parseInt(c_learning[0]);
+                //////////////
+
+                parser.Table_Course[] Table_learning = new parser.Table_Course[taille_learning] ;
+
+                // PARSING !
+                Table_learning = parser.ParserCours.parse(r.get(String.class));
+
+                if (Table_learning != null) {
+
+                    for(parser.Table_Course course : Table_learning)
+                        {
+                        %>
+                       <ul style="list-style-type:disc">
+                            <li> Course: <%out.print(course.getCourseName());%> </li>
+                            <li> Number hours : <%out.print(course.getNbHours());%></li>
+                       </ul>
+                        <%
                         }
-                    }
-                }
+                    }        
+
+                 }
+             }
+         }
         %>
     </body>
 </html>

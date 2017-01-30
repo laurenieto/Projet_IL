@@ -4,9 +4,10 @@
  */
 
 package fr.insa.docs;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,21 +24,19 @@ import javax.ws.rs.QueryParam;
  * REST Web Service
  *
  * @author laure
- * This allow to an university to accept a student,
- * giving the id of the university and the student
  */
 
-@Path("studentAccepted")
-public class StudentAcceptedResource {
+@Path("addCourseToLearning")
+public class AddCourseToLearningResource {
     @Context
     private UriInfo context;
 
-    /** Creates a new instance of StudentAcceptedResource */
-    public StudentAcceptedResource() {
+    /** Creates a new instance of AddCourseToLearningResource */
+    public AddCourseToLearningResource() {
     }
 
     /**
-     * Retrieves representation of an instance of fr.insa.docs.StudentAcceptedResource
+     * Retrieves representation of an instance of fr.insa.docs.AddCourseToLearningResource
      * @return an instance of java.lang.String
      */
     @GET
@@ -48,32 +47,30 @@ public class StudentAcceptedResource {
     }
 
     /**
-     * PUT method for updating or creating an instance of StudentAcceptedResource
+     * PUT method for updating or creating an instance of AddCourseToLearningResource
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */
     @PUT
-    @Consumes("application/xml")
-    public String applianceAccepted(@QueryParam("id_student") String id_student, @QueryParam("id_univ") String id_univ) {
-          PreparedStatement ps = null;
-          String res = "ok";
+    @Consumes("text/plain")
+     public String insertCourse(@QueryParam("id_student") String id_student, @QueryParam("id_univ") String id_univ, @QueryParam("id_course") String id_course) {
+        PreparedStatement ps = null;
+
         try {
-         
             int id_st_int = Integer.parseInt(id_student);
             int id_univ_int = Integer.parseInt(id_univ);
-            String sql_str = "UPDATE student_university SET univResponse = 1 WHERE student_id=" +id_st_int+ " and university_id=" + id_univ_int;
+            int id_course_int = Integer.parseInt(id_course);
+            String sql_str = "INSERT INTO student_courses VALUES (" + id_course_int + "," + id_st_int + ", "+ id_univ_int+")";
 
             Connection con = ConnectToDB.connect();
             ps = con.prepareStatement(sql_str);
+
             ps.executeUpdate();
-
-           
-
+            return String.valueOf("ok");
         } catch (SQLException ex) {
             Logger.getLogger(ApplyResource.class.getName()).log(Level.SEVERE, null, ex);
             return ex.toString();
         }
-            
-        return res;
+
     }
 }

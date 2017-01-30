@@ -24,7 +24,12 @@ import javax.ws.rs.QueryParam;
 /**
  * REST Web Service
  *
- * @author laure
+ * @author
+ * Put: This service allow to a student to apply to an university givin the id of both.
+ *
+ * Get: give the id of the student giving the username and the password, if it is in database.
+ * This allows to hide the username and the password from the URL.
+ *
  */
 
 @Path("apply")
@@ -79,7 +84,7 @@ public class ApplyResource {
      */
     @PUT
     @Consumes("application/xml")
-    public String insertApply(@QueryParam("id_student") String id_student, @QueryParam("id_univ") String id_univ) {
+    public String insertAppliance(@QueryParam("id_student") String id_student, @QueryParam("id_univ") String id_univ) {
         PreparedStatement ps = null;
   
         try {

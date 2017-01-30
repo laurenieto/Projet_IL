@@ -16,19 +16,23 @@
         <title>Manage students' travels</title>
     </head>
     <body>
-        <%!String id_student; String username;%>
+        <%String univName = request.getParameter("univ_name");%>
         <h1 align="center"> <font face="Courier" </font>Manage students' travels</h1>
 
      
-          <h2>Choose your course</h2>
+          <h2>Choose your course for the university <%out.print(univName);%></h2>
+          <br/>
+          <br/>
+         
+
+
           <%
+          
                 String id_univ = request.getParameter("id_univ");
+                String id_student = request.getParameter("id_student");
+                
                 Client cl = Client.create();
                 WebResource r = cl.resource("http://localhost:8080/TestAppDBWebApp/resources/listCourse?id_univ="+id_univ);
-
-                id_student = r.get(String.class);
-
-                System.out.println("|"+r.get(String.class)+"|");
 
                  // ATTENTION CODE DEGUEULASSE
                 String chaine = r.get(String.class);
@@ -43,9 +47,41 @@
 
                 if (Table != null) {
 
-                    for(parser.Table_Course univ : Table)
-                        {out.println(univ.getCourseName()+" | "+univ.getNbHours());}}
+                    for(parser.Table_Course course : Table)
+                        {
+                        %>
+                   <form action="" method="POST" >
+                        <%out.println(course.getCourseName()+" | "+course.getNbHours());%>
+                        <input type="submit" value="Add to my learning" name="add_course">
+                        <input type="hidden" name ="id_student" value="<%out.print(id_student);%>">
+                        <input type="hidden"  name="id_univ" value=<%out.print(id_univ);%>>
+                        <input type="hidden" name="univ_name" value=<%out.print(univName);%>>
+                        <input type="hidden" name="id_course" value=<%out.print(course.getId());%>>
+                        
+                    </form>
+                        <br/><%
+                    }}
+                    if (request.getParameter("add_course")!= null){
+                        //appel au we service pour inserer dans db
+                      
+                        id_student = request.getParameter("id_student");
+                        id_univ = request.getParameter("id_univ");
+                        String id_course = request.getParameter("id_course");
+                       
 
+                        Client cl_add = Client.create();
+                        WebResource r_add = cl_add.resource("http://localhost:8080/TestAppDBWebApp/resources/addCourseToLearning?id_student="+ id_student + "&id_univ="+id_univ + "&id_course="+id_course);
+
+                        String ret = r_add.put(String.class);
+                        if (ret.equals("ok")){
+                            %>
+                            <script type="text/javascript">alert("Successful insertion");</script>
+                        <%
+                            }
+                        else {
+                             %> <script type="text/javascript">alert("This course is already in your learning ");</script> <%
+                            }
+                        }
           %>
      
 

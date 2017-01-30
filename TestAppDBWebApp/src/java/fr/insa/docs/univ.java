@@ -20,7 +20,11 @@ import javax.ws.rs.QueryParam;
 /**
  * REST Web Service
  *
- * @author Lilian
+ * 
+ * This service allows to search university with a filter.
+ * 
+ * If the filter is empty, all the universities where a student can apply are listed.
+ *
  */
 
 @Path("univ")
